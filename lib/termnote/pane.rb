@@ -23,14 +23,20 @@ module TermNote
     end
 
     def render
-      puts show.header + space + formated_rows + space
+      puts show.header + space + formatted_rows + space(true)
     end
 
-    def space
-     "\n" * (height / 2)
+    def space(final=false)
+      rows_length = formatted_rows.lines.count
+      space_length = (height - rows_length)
+      newlines = height > rows_length ? space_length / 2 : 0
+      if !final && space_length.even?
+        newlines -= 1
+      end
+      "\n" * newlines
     end
 
-    def formated_rows
+    def formatted_rows
       @output ||= rows.map(&method(:guttered_row)).join("\n")
     end
 

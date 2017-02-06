@@ -25,7 +25,7 @@ module TermNote
       end
 
       def space
-        newlines = height > rows.size ? (height - rows.size) / 2 : 0
+        newlines = height > rows.size ? (height - rows.size - 1) / 2 : 0
         "\n" * newlines
       end
     end
